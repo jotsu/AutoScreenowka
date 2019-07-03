@@ -1,0 +1,93 @@
+<!--DOCTYPE html-->
+<!--comments-->
+
+<html>
+	<head>
+		<title>AutoScreenówka</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Konkurs rozpoznawania screenów">
+		<meta name="keywords" content="anime, konwent, konkurs">
+		<meta name="author" content="Julian 'Jotsu' Sacharczuk">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" type="image/png" href="misc/favicon.png"/>
+		<link rel="stylesheet" type="text/css" href="misc/style.css">
+		<script src="misc/screeny.js"></script>
+		<script src="misc/script.js"></script>
+	</head>
+
+	<!-- The Modal -->
+	<div class="modal" id="modal">
+		<!-- The modal's background url is the image -->
+		<div id="timer"></div>
+		<span id="podpis"></span>
+		<button id="close_button" onclick="closeModal()">&#10006;</button>
+		<button id="odp_button" onclick="pokazOdp()">ODPOWIEDŹ</button> <!--pokazuje odpowiedź-->
+		
+		<div class="odp_box" id="odp_box">
+			<p>
+			<button style="color: red;" onclick="answer('wrong')">&#10006;</button>	<!--nieprawidłowa odpowiedź-->
+			<button style="color: green;" onclick="answer('right')">&#10004;</button>	<!--prawidłowa odpowiedź-->
+			</p>
+		</div>
+		
+	</div>
+	
+	<body>
+	
+	<div class="naglowek" id="naglowek">
+		<h1>SCREENÓWKA</h1>
+		<button	onclick="toggle(document.getElementById('zasady'))">ZASADY</button>
+		<button onclick="toggle(document.getElementById('log'))">LOG</button>
+		<button onclick="setTimer(prompt('Czas na odpowiedź:'))">USTAW CZAS</button>
+		<br>
+		<button id="start" onclick="gameStart()">START!</button><br>
+	</div>
+	
+	<div id="kontener">	
+		
+		<div id="zasady">
+			<h2>ZASADY KONKURSU:</h2>
+			<ol>
+				<li>Konkurs odbywa się turowo. Każda drużyna może odpowiadać jedynie w swojej kolejce.
+				<li>Drużyna, której jest kolej (oznaczona na czerwono) wybiera numer nieodgadniętego wcześniej screena do pokazania i udziela jednej odpowiedzi.
+				<li>Czas na udzielenie ostatecznej odpowiedzi to <b id="time">60</b> sekund, jednak można poddać się wcześniej.
+				<li>Za poprawną odpowiedź uznaje się podanie tytułu (lub jego fragmentu) pozwalającego jednoznacznie określić anime, z którego pochodzi screen.
+				<li>Za udzielenie poprawnej odpowiedzi drużyna otrzymuje:
+				<ul>
+					<li>2 punkty, jeśli wybrany screen nie był wyświetlony wcześniej,
+					<li>1 punkt, jeśli został wybrany screen, który był wyświetlony wcześniej.
+				</ul>
+				<li>Za udzielenie błędnej odpowiedzi, poddanie się lub przekroczenie czasu na odpowiedź drużyna otrzymuje:
+				<ul>
+					<li>0 punktów, jeśli wybrany screen nie był wyświetlony wcześniej,
+					<li>-1 punkt, jeśli został wybrany screen, który był wyświetlony wcześniej.
+				</ul>
+				<li>Nieodgadnięty screen wraca do puli pytań i może być wybrany ponownie w kolejnych rundach przez tą samą lub inną drużynę.
+				<li>Runda kończy się, gdy jednokrotnie przejdzie kolejka każdej z drużyn biorących udział w konkursie. Kolejność odpowiadania drużyn w następnej rundzie jest ustalana losowo.
+
+			</ol>
+		</div>
+		
+		<table id="team_table" class="noselect">
+			<caption>DRUŻYNY
+				<button onclick="addTeam(prompt('Podaj nazwę drużyny:'))">&#10010;</button>
+				<button onclick="shuffleTeams()">&#10536;</button>
+			</caption>
+			<tr>
+				<th class="nr">Nr</th>
+				<th class="name">Nazwa</th>
+				<th class="score">pkt</th>
+				<th class="akcja">akcja</th>
+			</tr>
+		</table>
+		
+		<div id="log" style="background-image: url('misc/log_bkg.png')"></div>
+		
+	</div>
+	<ul id="screeny" class="screeny noselect"></ul>
+	
+	</body>
+	
+	<div id="odpowiedzi" style="display: none;"></div>
+	<div id="odpowiedzi_losowe" style="display: none;"></div>
+</html>
